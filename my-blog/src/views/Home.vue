@@ -1,5 +1,9 @@
 <template>
   <div class="home">
+
+    <div>points: {{ points }}</div>
+    <button @click="updatePoints(1)">add a point</button>
+    <button @click="updatePoints(-1)">remove a point</button>
     <div v-for="blog in blogs" :key="blog.id">
       <div class="blog">
         <h3>{{ blog.title }}</h3>
@@ -25,8 +29,18 @@ export default {
       { title: 'Mario vs Luigi, Ultimate Showdown', id: 3 },
     ])
 
-    return { 
+    return {
       blogs
+    }
+  },
+  methods: {
+    updatePoints(points) {
+      this.$store.commit('updatePoints', points)
+    }
+  },
+  computed: {
+    points() {
+      return this.$store.state.points
     }
   }
 }
